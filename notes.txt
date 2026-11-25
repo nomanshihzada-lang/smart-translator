@@ -1,0 +1,7 @@
+Smart Translator v1.0 is an accessible, high-speed translation plugin designed specifically for screen reader users by All Technology Update (Pakistan).
+
+Key Features:
+• Single Unified Language Selector: Select one target language with clear Checked/Not Checked status across 249 real global and regional languages.
+• Direct EditBox Auto-Replace: Automatically translates and replaces text inside WhatsApp and other input fields.
+• Multi-Engine Reliability: Works completely free without requiring any API keys.
+• Line-by-Line Accessible Reader: Breaks long paragraphs into clear, easy-to-navigate segments with instant Copy, Share, and Auto-Speak support.
