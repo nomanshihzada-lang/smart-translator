@@ -15,7 +15,7 @@ import "org.json.*"
 local PREF_NAME = "BridgeTech_Pro_Translator_Prefs"
 local prefs = service.getSharedPreferences(PREF_NAME, 0)
 
--- Google Translate 讴蹖 鬲賲丕賲 249 丨賯蹖賯蹖 夭亘丕賳賵诤 讴蹖 賲讴賲賱 賮蹃乇爻鬲 (氐乇賮 丕蹖讴 蹃蹖 賱爻俟)
+-- Google Translate 啶曕 啶膏き啷€ 249 啶掂ぞ啶膏啶むさ啶苦 啶ぞ啶粪ぞ啶撪 啶曕 啶啶班 啶膏啶氞
 local all_languages = {
   {"Abkhaz", "ab"},
   {"Acehnese", "ace"},
@@ -270,7 +270,6 @@ local all_languages = {
   {"Zulu", "zu"}
 }
 
--- 夭亘丕賳 讴蹝 讴賵趫 爻蹝 丕爻 讴丕 賳丕賲 賲毓賱賵賲 讴乇蹖诤
 local function getLanguageNameByCode(code)
   for _, item in ipairs(all_languages) do
     if item[2] == code then
@@ -455,7 +454,6 @@ end
 local showSettingsDialog
 local translateText
 
--- 爻賳诏賱 賱蹖賳诏賵蹖噩 爻賱蹖讴俟乇 趫丕卅蹖賱丕诏 (氐乇賮 丕蹖讴 蹃蹖 噩诏蹃 Checked / Not Checked 丕爻俟蹖俟爻 讴蹝 爻丕鬲诰)
 local function showSingleLanguagePicker(onLanguagePicked)
   local cfg = getSettings()
   local dialog = LuaDialog(service)
@@ -547,7 +545,6 @@ local function showSingleLanguagePicker(onLanguagePicked)
   showSafeDialog(dialog)
 end
 
--- About Dialog
 local function showAboutDialog(returnToMain)
   local dialog = LuaDialog(service)
   dialog.setTitle("About Smart Translator")
@@ -558,7 +555,7 @@ local function showAboutDialog(returnToMain)
   layout.setPadding(35, 25, 35, 25)
 
   local flagTitle = TextView(service)
-  flagTitle.setText("馃嚨馃嚢 Smart Translator - Version 1.0")
+  flagTitle.setText("馃嚨馃嚢 Smart Translator - Version 1.1")
   flagTitle.setTextSize(19)
   flagTitle.setTypeface(nil, Typeface.BOLD)
   layout.addView(flagTitle)
@@ -572,12 +569,11 @@ local function showAboutDialog(returnToMain)
 
   local descText = TextView(service)
   descText.setText(
-    "Smart Translator v1.0 is an accessible, high-speed translation plugin designed specifically for screen reader users by All Technology Update (Pakistan).\n\n" ..
-    "Key Features:\n" ..
-    "鈥� Single Unified Language Selector: Select one target language with clear Checked/Not Checked status across 249 real global and regional languages.\n" ..
-    "鈥� Direct EditBox Auto-Replace: Automatically translates and replaces text inside WhatsApp and other input fields.\n" ..
-    "鈥� Multi-Engine Reliability: Works completely free without requiring any API keys.\n" ..
-    "鈥� Line-by-Line Accessible Reader: Breaks long paragraphs into clear, easy-to-navigate segments with instant Copy, Share, and Auto-Speak support."
+    "What's New in Version 1.1:\n\n" ..
+    "1. Universal Screen Text Translation: Now you can translate any focused message or text anywhere on your screen (WhatsApp chats, notifications, browsers, and apps) even outside edit boxes.\n" ..
+    "2. Full Message & Multi-Line Extraction: Automatically collects complete text across nested screen containers so no part of a message is missed.\n" ..
+    "3. Smart Focus Priority: Prevents empty input boxes from blocking translation while reading messages in chat apps.\n" ..
+    "4. Unified Single Language Selector: Simplified to one clear language selector with accurate Checked / Not Checked status across all 249 languages."
   )
   descText.setTextSize(15)
   layout.addView(descText)
@@ -605,7 +601,6 @@ local function showAboutDialog(returnToMain)
   showSafeDialog(dialog)
 end
 
--- More Settings / Support & Feedback Dialog
 local function showMoreSettingsDialog()
   local dialog = LuaDialog(service)
   dialog.setTitle("Settings, Support & Feedback")
@@ -643,9 +638,9 @@ local function showMoreSettingsDialog()
     onClick = function(v)
       local msg = tostring(edtFb.getText()):match("^%s*(.-)%s*$")
       if msg == "" then
-        msg = "Assalam-o-Alaikum Noman Khan! Feedback regarding Smart Translator v1.0:"
+        msg = "Assalam-o-Alaikum Noman Khan! Feedback regarding Smart Translator v1.1:"
       else
-        msg = "Smart Translator v1.0 Feedback:\n" .. msg
+        msg = "Smart Translator v1.1 Feedback:\n" .. msg
       end
       local waUrl = "https://wa.me/923145406759?text=" .. URLEncoder.encode(msg, "UTF-8")
       openExternalUrl(waUrl, dialog)
@@ -859,18 +854,16 @@ local function showResultDialog(originalText, translatedText, editNode, wasRepla
   showSafeDialog(dialog)
 end
 
--- 賲蹖賳 爻蹖俟賳诏夭 趫丕卅蹖賱丕诏 (氐乇賮 丕蹖讴 蹃蹖 Language Selector 讴蹝 爻丕鬲诰)
 showSettingsDialog = function()
   local cfg = getSettings()
   local dialog = LuaDialog(service)
-  dialog.setTitle("Smart Translator v1.0")
+  dialog.setTitle("Smart Translator v1.1")
 
   local scrollView = ScrollView(service)
   local layout = LinearLayout(service)
   layout.setOrientation(LinearLayout.VERTICAL)
   layout.setPadding(35, 25, 35, 25)
 
-  -- 俟丕倬 蹃蹖趫賳诏: Smart Translator -> Version 1.0 Developed by All Technology Update -> Pakistan Flag
   local mainHeading = TextView(service)
   mainHeading.setText("Smart Translator")
   mainHeading.setTextSize(21)
@@ -878,13 +871,12 @@ showSettingsDialog = function()
   layout.addView(mainHeading)
 
   local subHeading = TextView(service)
-  subHeading.setText("Version 1.0 - Developed by All Technology Update 馃嚨馃嚢")
+  subHeading.setText("Version 1.1 - Developed by All Technology Update 馃嚨馃嚢")
   subHeading.setTextSize(15)
   subHeading.setTypeface(nil, Typeface.BOLD)
   subHeading.setPadding(0, 4, 0, 18)
   layout.addView(subHeading)
 
-  -- 氐乇賮 丕蹖讴 蹃蹖 賱蹖賳诏賵蹖噩 爻賱蹖讴卮賳 丌倬卮賳 (丿賵 丿賵 丌倬卮賳 禺鬲賲 讴乇 丿蹖蹝 诏卅蹝 蹃蹖诤)
   local lblLang = TextView(service)
   lblLang.setText("Translation Language (Auto-Detect Input):")
   lblLang.setTextSize(16)
@@ -932,7 +924,6 @@ showSettingsDialog = function()
     return getSettings().target_name
   end
 
-  -- 丕囟丕賮蹖 亘俟賳賵诤 讴蹖 賯胤丕乇: Settings -> About
   local extraRow = LinearLayout(service)
   extraRow.setOrientation(LinearLayout.HORIZONTAL)
   extraRow.setPadding(0, 18, 0, 0)
@@ -965,7 +956,6 @@ showSettingsDialog = function()
   extraRow.addView(btnOuterAbout)
   layout.addView(extraRow)
 
-  -- 亘賳蹖丕丿蹖 亘俟賳賵诤 讴蹖 賯胤丕乇: Translate -> Save -> Exit
   local btnRow = LinearLayout(service)
   btnRow.setOrientation(LinearLayout.HORIZONTAL)
   btnRow.setPadding(0, 10, 0, 0)
@@ -1018,7 +1008,6 @@ showSettingsDialog = function()
   showSafeDialog(dialog)
 end
 
--- HTML Entities 氐丕賮 讴乇賳蹝 讴丕 賮賳讴卮賳
 local function decodeHtmlEntities(str)
   if str == nil then return "" end
   local ok, spanned = pcall(function()
@@ -1062,7 +1051,6 @@ local function handleTranslationSuccess(originalText, translatedText, editNode)
   showResultDialog(originalText, translatedText, editNode, wasReplaced)
 end
 
--- 4-Engine Multi-Fallback Translator (Auto-Detect Source -> Selected Single Language)
 translateText = function(textToTranslate, editNode)
   local cfg = getSettings()
   service.speak("Translating to " .. cfg.target_name)
@@ -1070,7 +1058,6 @@ translateText = function(textToTranslate, editNode)
   local mainHandler = Handler(Looper.getMainLooper())
   local runnable = Runnable{
     run = function()
-      local sLang = "auto"
       local tLang = cfg.target_code
       local encodedText = URLEncoder.encode(textToTranslate, "UTF-8")
       local errorLogs = {}
@@ -1210,8 +1197,9 @@ translateText = function(textToTranslate, editNode)
   Thread(runnable).start()
 end
 
-local function findEditableNode(node)
-  if node == nil then return nil end
+-- 趩蹖讴 讴乇蹖诤 讴蹃 丌蹖丕 蹖蹃 賲禺氐賵氐 賳賵趫 丕蹖趫俟 丕蹖亘賱 (EditText) 蹃蹝
+local function isNodeEditable(node)
+  if node == nil then return false end
   local isEd = false
   pcall(function()
     if node.isEditable() then
@@ -1220,49 +1208,20 @@ local function findEditableNode(node)
       isEd = true
     end
   end)
-  if isEd then
-    return node
-  end
-  local count = 0
-  pcall(function() count = node.getChildCount() end)
-  for i = 0, count - 1 do
-    local child = node.getChild(i)
-    local found = findEditableNode(child)
-    if found ~= nil then
-      return found
-    end
-  end
-  return nil
+  return isEd
 end
 
-local function getFocusInfo()
-  local accNode = nil
-  local inputNode = nil
-
-  pcall(function()
-    accNode = service.findFocus(AccessibilityNodeInfo.FOCUS_ACCESSIBILITY)
-  end)
-  pcall(function()
-    inputNode = service.findFocus(AccessibilityNodeInfo.FOCUS_INPUT)
-  end)
-
-  if accNode == nil then
-    pcall(function()
-      accNode = service.getFocus()
-    end)
-  end
-
-  local primaryNode = accNode or inputNode
-  local editableNode = findEditableNode(accNode)
-  if editableNode == nil and inputNode ~= nil then
-    editableNode = findEditableNode(inputNode)
-  end
-
-  return primaryNode, editableNode
-end
-
-local function extractNodeText(node, isEditBox)
+-- 賳賵趫 丕賵乇 丕爻 讴蹝 鬲賲丕賲 趩丕卅賱趫 賳賵趫夭 爻蹝 賲讴賲賱 俟蹖讴爻俟 丕讴俟诰丕 讴乇蹖诤 (WhatsApp 賲蹖爻噩夭 丕賵乇 毓丕賲 丕爻讴乇蹖賳 俟蹖讴爻俟 讴蹝 賱蹖蹝)
+local function collectFullNodeText(node, isEditBox, depth)
   if node == nil then return "" end
+  depth = depth or 0
+  if depth > 12 then return "" end
+
+  pcall(function() node.refresh() end)
+
+  local parts = {}
+  local directText = ""
+
   if node.getText() ~= nil and tostring(node.getText()) ~= "" then
     local isHint = false
     if Build.VERSION.SDK_INT >= 26 then
@@ -1273,45 +1232,132 @@ local function extractNodeText(node, isEditBox)
       end)
     end
     if not isHint then
-      return tostring(node.getText())
+      directText = tostring(node.getText()):match("^%s*(.-)%s*$")
     end
   end
 
-  if not isEditBox then
+  if directText ~= "" then
+    table.insert(parts, directText)
+  elseif not isEditBox then
     if node.getContentDescription() ~= nil and tostring(node.getContentDescription()) ~= "" then
-      return tostring(node.getContentDescription())
+      local cd = tostring(node.getContentDescription()):match("^%s*(.-)%s*$")
+      if cd ~= "" then
+        table.insert(parts, cd)
+      end
     end
   end
 
   local count = 0
   pcall(function() count = node.getChildCount() end)
   for i = 0, count - 1 do
-    local child = node.getChild(i)
+    local child = nil
+    pcall(function() child = node.getChild(i) end)
     if child ~= nil then
-      local cText = extractNodeText(child, isEditBox)
+      local cText = collectFullNodeText(child, isEditBox, depth + 1)
       if cText ~= "" then
-        return cText
+        -- 趫倬賱蹖讴蹖俟 俟蹖讴爻俟 爻蹝 亘趩蹖诤
+        local alreadyExists = false
+        for _, existing in ipairs(parts) do
+          if existing == cText then
+            alreadyExists = true
+            break
+          end
+        end
+        if not alreadyExists then
+          table.insert(parts, cText)
+        end
       end
     end
   end
-  return ""
+
+  return table.concat(parts, "\n")
+end
+
+-- 乇賵俟 賵賳趫賵 賲蹖诤 爻蹝 賲賵噩賵丿蹃 Accessibility Focused 賳賵趫 鬲賱丕卮 讴乇賳蹝 讴丕 亘蹖讴 丕倬 賮賳讴卮賳
+local function findAccessibilityFocusedInTree(rootNode, depth)
+  if rootNode == nil then return nil end
+  depth = depth or 0
+  if depth > 15 then return nil end
+
+  local isFocused = false
+  pcall(function()
+    if rootNode.isAccessibilityFocused() then
+      isFocused = true
+    end
+  end)
+  if isFocused then
+    return rootNode
+  end
+
+  local count = 0
+  pcall(function() count = rootNode.getChildCount() end)
+  for i = 0, count - 1 do
+    local child = nil
+    pcall(function() child = rootNode.getChild(i) end)
+    if child ~= nil then
+      local found = findAccessibilityFocusedInTree(child, depth + 1)
+      if found ~= nil then
+        return found
+      end
+    end
+  end
+  return nil
+end
+
+-- 丕爻讴乇蹖賳 讴蹝 讴爻蹖 亘诰蹖 丨氐蹝 (WhatsApp 賲蹖爻噩貙 毓丕賲 俟蹖讴爻俟貙 蹖丕 丕蹖趫俟 亘丕讴爻) 爻蹝 俟蹖讴爻俟 賳讴丕賱蹖诤
+local function getScreenTargetData()
+  local accNode = nil
+  local inputNode = nil
+
+  -- 1. 倬蹃賱蹝 Accessibility Focus (噩賵 趩蹖夭 丕爻 賵賯鬲 丕爻讴乇蹖賳 乇蹖趫乇 倬乇 爻賱蹖讴俟 蹃蹝) 丕俟诰丕卅蹖诤
+  pcall(function()
+    accNode = service.findFocus(AccessibilityNodeInfo.FOCUS_ACCESSIBILITY)
+  end)
+  if accNode == nil then
+    pcall(function()
+      accNode = service.getFocus()
+    end)
+  end
+  if accNode == nil then
+    pcall(function()
+      local root = service.getRootInActiveWindow()
+      accNode = findAccessibilityFocusedInTree(root, 0)
+    end)
+  end
+
+  -- 2. Input Focus 亘诰蹖 趩蹖讴 讴乇蹖诤
+  pcall(function()
+    inputNode = service.findFocus(AccessibilityNodeInfo.FOCUS_INPUT)
+  end)
+
+  local pkgName = ""
+  local refNode = accNode or inputNode
+  if refNode ~= nil and refNode.getPackageName() ~= nil then
+    pkgName = tostring(refNode.getPackageName())
+  end
+
+  -- 趩蹖讴 讴乇蹖诤 讴蹃 丌蹖丕 氐丕乇賮 讴丕 賮賵讴爻 賵丕賯毓蹖 丕蹖趫俟 亘丕讴爻 倬乇 蹃蹝 蹖丕 讴爻蹖 毓丕賲 俟蹖讴爻俟/賲蹖爻噩 倬乇
+  local editNode = nil
+  if accNode ~= nil and isNodeEditable(accNode) then
+    editNode = accNode
+  elseif accNode == nil and inputNode ~= nil and isNodeEditable(inputNode) then
+    editNode = inputNode
+  end
+
+  local extractedText = ""
+  if editNode ~= nil then
+    extractedText = collectFullNodeText(editNode, true, 0)
+  elseif accNode ~= nil then
+    extractedText = collectFullNodeText(accNode, false, 0)
+  elseif inputNode ~= nil then
+    extractedText = collectFullNodeText(inputNode, isNodeEditable(inputNode), 0)
+  end
+
+  return extractedText, editNode, pkgName
 end
 
 local function main()
-  local node, editNode = getFocusInfo()
-  local focusedText = ""
-
-  if editNode ~= nil then
-    focusedText = extractNodeText(editNode, true)
-  end
-  if focusedText == "" and node ~= nil then
-    focusedText = extractNodeText(node, false)
-  end
-
-  local pkgName = ""
-  if node ~= nil and node.getPackageName() ~= nil then
-    pkgName = tostring(node.getPackageName())
-  end
+  local focusedText, editNode, pkgName = getScreenTargetData()
 
   local isLauncher = string.find(string.lower(pkgName), "launcher") or string.find(string.lower(pkgName), "home")
 
